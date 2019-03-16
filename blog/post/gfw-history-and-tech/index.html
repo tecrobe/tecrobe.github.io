@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>如何翻墙[1]: 什么是墙？简述 GFW 的发展历史和主要技术 | Tecrobe&#39;s Blog</title>
+
+
+
+<link rel="stylesheet" href="/blog/css/style.css"/><link rel='stylesheet' href='https://tecrobe.github.io/blog/css/custom.css'><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://tecrobe.github.io/blog">
+          <h1 class="title is-4">Tecrobe&#39;s Blog</h1>
+        </a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile"></nav>
+      </div>
+    </nav>
+
+    <nav class="nav">
+      
+
+      
+    </nav>
+
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="subtitle tags is-6 is-pulled-right">
+      
+    </div>
+    <h2 class="subtitle is-6">January 10, 2019</h2>
+    <h1 class="title">如何翻墙[1]: 什么是墙？简述 GFW 的发展历史和主要技术</h1>
+    
+    <div class="content">
+      <h1 id="什么是墙">什么是墙？</h1>
+
+<blockquote>
+<p><strong>防火长城</strong>（英语：<strong>Great Firewall</strong>，常用简称：<strong>GFW</strong>，中文也称<strong>中国国家防火墙</strong>，中国大陆民众俗称<strong>墙</strong>、防火墙、功夫网等等），是对中华人民共和国政府在其互联网边界审查系统（包括相关行政审查系统）的统称。</p>
+</blockquote>
+
+<blockquote>
+<p>此系统起步于1998年，其英文名称得自于2002年5月17日Charles R. Smith所写的一篇关于中国网络审查的文章《The Great Firewall of China》，取与Great Wall（长城）相谐的效果，简写为Great Firewall，缩写GFW。随着使用的拓广，中文“墙”和英文“GFW”有时也被用作动词，网友所说的<strong>“被墙”</strong>即指网站内容被防火长城所屏蔽或者指服务器的通讯被封阻，<strong>“翻墙”</strong>也被引申为突破网络审查浏览境内外被屏蔽的网站或使用服务的行为。</p>
+</blockquote>
+
+<p>—— 引自维基百科</p>
+
+<h1 id="背景知识">背景知识</h1>
+
+<h2 id="ip-地址">IP 地址</h2>
+
+<p>在互联网中，IP 地址相当于一台主机的门牌号，你需要知道对方的 IP 地址，才能与其通信。</p>
+
+<p>根据互联网协议规定，互联网中的数据包必须包括目标主机的 IP 地址，这样，网络中的路由设备才能将数据包发送到对应的主机。</p>
+
+<p>而在互联网中发送一个数据包，可以用寄信来类比。</p>
+
+<p>首先，你得注明寄信人（你的 IP 地址），和收信人（对方主机 IP 地址），然后得把信件交给快递员（路由设备），由快递员交给收信人。</p>
+
+<p>爱思考的同学可能会发现，上述过程中并不包括<strong>验证</strong>机制。信件能否寄出去，以及回信是否靠谱，都要看快递员（网络中的路由设备）。假如快递员伪造/丢弃信件，你也没办法。</p>
+
+<h2 id="dns">DNS</h2>
+
+<p>在互联网的实际应用中，人们发现，IP 地址太难记了（形如: 172.16.254.1 或 2001:db8:0:1234:0:567:8:1 ），而且实际使用起来也不方便。于是人们便发明了 DNS 这种东西。</p>
+
+<p>在有了 DNS 以后，人们寄信（上网）就不需要记住门牌号（IP 地址）了，只需要知道收信人（目标主机）的别名（域名）即可。</p>
+
+<p>比如你要寄信给 Google，只需要知道他的别名叫 www.google.com 就可以了。</p>
+
+<p>此时，你在寄信给 Google 之前，还需要先寄信给 DNS（你是事先知道 DNS 的门牌号的，因为他们的门牌号比较好记，都是 8.8.8.8 或 1.1.1.1 这种特殊地址） ，问问 www.google.com 的门牌号是多少，然后按照 DNS 的回信内容填写信件收信地址，有了收信地址之后，才能把信件交给快递员。</p>
+
+<p>值得注意的是，在 DNS 查询过程中，同样<strong>没有验证机制</strong>，也就是说在如果 DNS 给你的回信是伪造的，你也无法得知，只能按照回信内容填写地址。</p>
+
+<h2 id="sni">SNI</h2>
+
+<p>从上面的例子大家可以看到，如果不增加任何验证机制，互联网是十分不靠谱的！而那些设计互联网的工程师们当然没闲着，为了让互联网传输有保障，他们设计了 TLS(传输层安全协定） 这个东东。</p>
+
+<p>这个东东在当今互联网上十分重要，因为它不仅为“信件”提供了<strong>验证机制</strong>，而且还会将传输的数据加密，以避免中间人偷窥/篡改。</p>
+
+<p>那么怎么知道有没有用上 TLS 呢？你只需要向上看看浏览器的地址栏，如果是 https:// 开头，证明对方主机（网站）启用了 TLS，你和他的通信内容安全有保障啦！如果是 http:// 开头，那么要么是这个网站提供者认为传输的内容不重要，要么就是这个网站太旧，或管理员不作为。这里再批评一下科大讯飞，他旗下的网站全部是 http:// 明文传输内容，甚至连密码也不例外。也就是说你其网站登录时，密码会明文传输给科大讯飞的主机，中间经过的所有路由设备都可以看见你的密码。因此对隐私在意的同学，不妨给这些网站单独设置一个密码。</p>
+
+<p>说了这么多 TLS，差点就扯远了。上面说道 TLS 能保证通信安全靠谱，那它难道就没有缺陷了吗？当然不是。</p>
+
+<p>继续按照上面快递员的举例，由于房价日益上涨（误），许多人选择合租在一间房子里（共用一个 IP 地址），在不使用 TLS 时，只需要在信中交代对方的别名（Host 头）即可，快递员会把信送到正确的人手中。而使用 TLS 之后，快递员不能看到信中的内容，也就只能将信送到这间屋子，具体给谁他就不知道了。而且，由于合租的大多是陌生人，如果给错了不太合适，那么快递员只好将信丢弃了。</p>
+
+<p>为了解决这个问题，人们便把收信人别名写在信封上，这样快递员就能把信送到正确的人手上，这信封上写的别名，就是 SNI (Server Name Indication)。这个简单方便的解决措施，虽然解决了问题，可是也就方便了快递公司对于某个举报其作恶行为的人的报复 —— 要求快递员看到 xxx 的别名就把信丢弃。</p>
+
+<h1 id="gfw-发展历史">GFW 发展历史</h1>
+
+<p>对于互联网的跨国流量，都要经过几个特定的国际网络出口。GFW 的存在，就好像是一位老大哥，站在几个国际出口处，把每个快递员的信抢来，确定内容得到党和国家的认可后才放行。</p>
+
+<p>不过，老大哥在 24 小时的不间断审查中，变得愈加老奸巨猾，紧紧跟着互联网升级的脚步，及时升级，来确保审查的有效。这就是 GFW 的发展历史。</p>
+
+<h2 id="远古时期">远古时期</h2>
+
+<p>最初的老大哥非常简单粗暴，他只会看信件的内容，只在看到不被党所认可的词汇才会把信件丢弃。</p>
+
+<p>这也就是所谓针对 http 协议的<strong>关键词阻断</strong>。</p>
+
+<h2 id="近代">近代</h2>
+
+<p>后来有一天，老大哥具备了识别 DNS 信件的能力，如果看到请求的别名是不被党所认可的网站，狡猾的老大哥就会伪造一篇回信寄回去，于是众多大陆网民就无法访问这些网站了。这就是大名鼎鼎的 <strong>DNS 污染</strong>。</p>
+
+<p>而那些位于大陆的 DNS，虽然向他们发去信件不会收到老大哥的审查，但是由于身在大陆，不得不屈服于老大哥，他们只好在回信中针对部分网站回复假的地址。</p>
+
+<p>不过有些心细的网民整理了各个别名所对应的真实地址，这就是 <strong>Hosts 文件</strong>。你只需要把这个文件交给操作系统，如果 Hosts 文件包含要查询的别名，就可以直接获取地址，不必再去问 DNS 了。</p>
+
+<p>然而这种方法也有局限性。之后，老大哥也记住了部分别名所对应的地址，只要看到收信地址在黑名单里，就会丢弃信件。这就是 <strong>IP 地址黑名单</strong>。</p>
+
+<h2 id="现代">现代</h2>
+
+<p>在出现了 TLS 后，老大哥便不再具备审查信件内容的能力，关键词阻断基本无效。而有了 DNSSec, DNSCrypt, DNS over TLS 等具备验证能力甚至加密的 DNS 查询方式后，DNS 污染也可以避免，翻墙形势喜人，只需要 Hosts 文件或者带验证机制的 DNS 查询就可以穿过防火长城。然而好景不长，老大哥发现 TLS 也有弱点，便是 SNI。在全国第十九届翻墙大赛（十九大）之后，各个国际出口的老大哥陆陆续续学会了 SNI 探测的能力，如果 SNI 上的别名不被党所认可，就将信件丢弃。</p>
+
+<p>至此，由于还未普及加密传输 SNI 的技术（ESNI），翻墙也就只能通过代理了。</p>
+
+<h1 id="番外篇">番外篇</h1>
+
+<p>其实老大哥的审查不只是针对被封锁的网站，还针对那些提供翻墙代理服务的服务器主机。</p>
+
+<p>例如之前 Shadowsocks 就曝光过可以被主动检测的漏洞（现已修复），GFW 就可以通过类似的方法，来判断与墙外服务器的通信是否为翻墙用途，如果是，就把对应 IP 地址加入黑名单。</p>
+
+<p>而现在的代理软件的主要研究方向之一就是避免暴露过多的流量特征，以避免被 GFW 识别出是翻墙代理服务器，，从而保证翻墙服务的有效性。</p>
+
+<h1 id="references">References</h1>
+
+<ol>
+<li>端传媒. <a href="https://theinitium.com/article/20150904-mainland-greatfirewall/" target="_blank">道高一尺，牆高一丈：互聯網封鎖是如何升級的</a> [2015-09-04]</li>
+<li>Wikipedia. <a href="https://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E" target="_blank">防火长城 - 维基百科</a> [2019-03-07]</li>
+<li>编程随想. <a href="https://program-think.blogspot.com/2014/01/dns.html" target="_blank">扫盲 DNS 原理，兼谈“域名劫持”和“域名欺骗/域名污染”</a> [2014-01-23]</li>
+</ol>
+      
+      <div class="related">
+</div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+    
+  </div>
+</section>
+
+
+
+</body>
+</html>
+

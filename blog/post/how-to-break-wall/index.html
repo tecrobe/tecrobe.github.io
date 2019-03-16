@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>如何翻墙[3]: 科学上网实际操作指南 | Tecrobe&#39;s Blog</title>
+
+
+
+<link rel="stylesheet" href="/blog/css/style.css"/><link rel='stylesheet' href='https://tecrobe.github.io/blog/css/custom.css'><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://tecrobe.github.io/blog">
+          <h1 class="title is-4">Tecrobe&#39;s Blog</h1>
+        </a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile"></nav>
+      </div>
+    </nav>
+
+    <nav class="nav">
+      
+
+      
+    </nav>
+
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="subtitle tags is-6 is-pulled-right">
+      
+    </div>
+    <h2 class="subtitle is-6">March 10, 2019</h2>
+    <h1 class="title">如何翻墙[3]: 科学上网实际操作指南</h1>
+    
+    <div class="content">
+      <p>前两篇文章分别介绍了 GFW 的发展历史和翻墙技术的原理，如果你还没看的话，强烈推荐先去<a href="/blog/post/break-wall">浏览一遍</a>，看完后你将会对翻墙有更深的理解，也有助于你对翻墙软件配置的理解。</p>
+
+<p>本文主要介绍 ShadowsocksR 的使用方法。</p>
+
+<h1 id="ssr-客户端下载">SSR 客户端下载</h1>
+
+<p>Tips: 由于 Github Releases 连接受到 GFW 的严重劣化，可能无法打开下载链接，可以尝试多刷新几次。
+如果下载速度太慢，可以试试备用链接。</p>
+
+<h3 id="android">Android</h3>
+
+<p><a href="https://github.com/shadowsocksrr/shadowsocksr-android/releases/download/3.5.4/shadowsocksr-android-3.5.4.apk" target="_blank">SSRR for Android</a></p>
+
+<p><a href="https://github.com/tecrobe/tecrobe-download/raw/master/shadowsocksr-android-3.5.4.apk" target="_blank">SSRR for Android 备用</a></p>
+
+<h3 id="windows">Windows</h3>
+
+<p><a href="https://github.com/shadowsocksrr/shadowsocksr-csharp/releases/download/4.9.0/ShadowsocksR-win-4.9.0.zip" target="_blank">SSRR for Windows</a></p>
+
+<p><a href="https://github.com/tecrobe/tecrobe-download/raw/master/ShadowsocksR-win-4.9.0.zip" target="_blank">SSRR for Windows 备用</a></p>
+
+<h1 id="如何找到可用的-ssr-代理">如何找到可用的 SSR 代理</h1>
+
+<p>当今，翻墙产业链已经基本成熟，有众多机场（SSR 代理服务器提供商）可供选择，部分机场还提供免费 SSR 节点。只需前往相应官网，用邮箱注册帐号即可获取节点信息。</p>
+
+<p>通常免费节点会限速/限流量，有的机场会允许签(xu)到(ming)获取流量。若需求不大，通常机场自带的流量已经够用（1G 以上）。即使用完，还可以再注册一个帐号继续使用。（只需要再注册一个邮箱，就可以重新注册新的机场帐号。<a href="https://protonmail.com" target="_blank">Protonmail</a> 邮箱的注册无需手机号）或者不同机场换着用也可以。</p>
+
+<p>有一个提供免费服务的机场，<a href="https://关于gfw娘是个小碧池这件事.我有一句mmp要讲.com/auth/register" target="_blank">NovaLive</a>。</p>
+
+<p>直接用 Google 搜索 “SSR 机场”，应该也能找到不少可用节点。</p>
+
+<p>另外，有人做了个<a href="https://github.com/387099/SSR/issues/1" target="_blank">付费机场评测</a>，相当于一个机场列表，里面有的机场也提供免费服务，可以注册个号试试。</p>
+
+<h1 id="ssr-android-使用">SSR Android 使用</h1>
+
+<h3 id="ssr-链接">SSR 链接</h3>
+
+<p>先从机场复制 SSR 链接。</p>
+
+<p>打开 SSRR ，点击左上角的 ShadowsocksR 。</p>
+
+<p>点击右下角 + 号，选择从剪贴板导入。</p>
+
+<p>返回主界面，点击右上角小飞机，系统会询问是否连接 VPN ，选择是，即可科学上网。</p>
+
+<p>再次点击右上角小飞机即可关闭 SSR 。</p>
+
+<p><img src="/blog/image/ssr1.png" alt="ssr1" />
+<img src="/blog/image/ssr2.png" alt="ssr2" />
+<img src="/blog/image/ssr3.png" alt="ssr3" /></p>
+
+<h3 id="ssr-订阅链接">SSR 订阅链接</h3>
+
+<p>仍然先从机场中找到订阅链接（通常以 https:// 开头），然后复制。</p>
+
+<p>打开 SSRR ，点击左上角的 ShadowsockR 。</p>
+
+<p>点击右下角 + 号，选择添加/升级 SSR 订阅。</p>
+
+<p>点击添加/升级 SSR 订阅，然后长按输入框，点击粘贴。</p>
+
+<p>然后确定，打开自动更新，最后点击确定并升级即可。</p>
+
+<p>返回主界面，点击右上角小飞机，系统会询问是否连接 VPN ，选择是，即可科学上网。</p>
+
+<p>再次点击右上角小飞机即可关闭 SSR 。</p>
+
+<p><img src="/blog/image/ssr1.png" alt="ssr1" />
+<img src="/blog/image/ssr2.png" alt="ssr2" />
+<img src="/blog/image/ssr3.png" alt="ssr3" />
+<img src="/blog/image/ssr4.png" alt="ssr4" /></p>
+
+<h3 id="优化使用体验">优化使用体验</h3>
+
+<p>Tips: 需要先关闭 SSR 才能更改功能设置</p>
+
+<p>主界面往下拖即可看见功能设置，点击路由，选择 <code>绕过局域网及中国大陆地址</code> 。这样访问国内网站时就不会走代理，从而加快访问国内网站访问速度。</p>
+
+<p>建议打开 <code>IPv6 路由</code>。</p>
+
+<p>继续往下拖，可以打开 <code>自动连接</code>。这样 SSR 就会开机自启，就是那种没有墙的感觉！</p>
+
+<p><img src="/blog/image/ssr5.png" alt="ssr5" />
+<img src="/blog/image/ssr6.png" alt="ssr6" /></p>
+
+<h1 id="ssr-windows-使用">SSR Windows 使用</h1>
+
+<p>下载下来后先解压所有文件，解压后会看到 <code>ShadowsocksR-dotnet2.0.exe</code> 和 <code>ShadowsocksR-dotnet4.0.exe</code> 两个可执行文件，Win8 及以上请使用 dotnet4.0 版本，Win7 及以下请使用 dotnet 2.0 版本。</p>
+
+<p>双击运行后，右下角可以看到小飞机的图标。右键点击小飞机。</p>
+
+<p><code>服务器订阅</code> - <code>SSR 服务器订阅设置</code> - <code>Add</code> - 清空网址输入框中的内容 - 粘贴订阅链接 - <code>确定</code> - <code>更新 SSR 服务器订阅（不通过代理）</code></p>
+
+<p>最后鼠标中键点击小飞机图标，选择代理服务器节点，然后即可科学上网。</p>
+
+<h3 id="优化使用">优化使用</h3>
+
+<p>右键小飞机后，点击选项设置，可以设置开机启动。</p>
+
+<p>系统代理模式建议选 <code>全局</code>。</p>
+
+<p>代理规则选择 <code>绕过局域网和大陆</code>。</p>
+
+<p>至于 <code>服务器负载均衡</code> 通常不建议开。</p>
+
+<h1 id="小结">小结</h1>
+
+<p>科学上网的方法当然很多，本文提供了比较简单方便（新手向）的通用型方法，以供同学们参考。将来还会介绍其他翻墙方法（如 Shadowsocks 的使用，V2Ray 等等）。</p>
+
+<p>另，在最后附上一些傻瓜式翻墙软件的下载链接。（效果不敢保证）</p>
+
+<p><a href="https://github.com/tecrobe/tecrobe-download/raw/master/PsiphonAndroid.apk" target="_blank">Psiphon For Android</a></p>
+
+<p><a href="https://github.com/tecrobe/tecrobe-download/raw/master/psiphon3.exe" target="_blank">Psiphon For Windows</a></p>
+
+<p>PS: Psiphon 还可以通过向 get@psiphon3.com 发送邮件（任意文字）来获得最新版本的免翻墙下载链接。如果不行，可以试试用国外的邮箱服务（如 Outlook，Protonmail）。</p>
+
+<p><a href="https://github.com/getlantern/download/wiki" target="_blank">Lantern</a></p>
+      
+      <div class="related">
+</div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+    
+  </div>
+</section>
+
+
+
+</body>
+</html>
+

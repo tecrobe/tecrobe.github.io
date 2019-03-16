@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>如何翻墙[2]: 兼谈各种翻墙技术原理 | Tecrobe&#39;s Blog</title>
+
+
+
+<link rel="stylesheet" href="/blog/css/style.css"/><link rel='stylesheet' href='https://tecrobe.github.io/blog/css/custom.css'><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://tecrobe.github.io/blog">
+          <h1 class="title is-4">Tecrobe&#39;s Blog</h1>
+        </a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile"></nav>
+      </div>
+    </nav>
+
+    <nav class="nav">
+      
+
+      
+    </nav>
+
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="subtitle tags is-6 is-pulled-right">
+      
+    </div>
+    <h2 class="subtitle is-6">February 10, 2019</h2>
+    <h1 class="title">如何翻墙[2]: 兼谈各种翻墙技术原理</h1>
+    
+    <div class="content">
+      <p><a href="/blog/post/gfw-history-and-tech/">上一篇文章</a>主要介绍了 GFW 的原理，本篇文章则从 GFW 原理的角度，阐释当下各种翻墙技术的原理。</p>
+
+<p>如果看不懂本文的部分专业术语，还请先浏览本系列的第一篇文章。</p>
+
+<h1 id="dns-over-tls-https">DNS over TLS/HTTPS</h1>
+
+<p>本质上是为 DNS 查询套了层壳，从而让通信安全可靠，也就避免了 <strong>DNS 污染</strong>。目前主流浏览器中，Firefox 支持此项技术。</p>
+
+<p>通过 DoT/DoH 类技术，可以避免 DNS 污染型的封锁。不过鉴于当前封锁方式多元化（对一个网站 DNS 污染的同时还会配合 SNI 探测），仅仅通过此项技术，已经无法达到翻墙的效果。</p>
+
+<h1 id="esni-domain-fronting">ESNI/Domain Fronting</h1>
+
+<p>这类技术用来避免 <strong>SNI 探测</strong>，配合上面的 DoT/DoH 技术，可以访问部分封锁不是很严重的网站，如 Medium 。不过由于 ESNI 技术还没有推广，大多数网站还未支持，目前的翻墙效果十分有限。</p>
+
+<h1 id="代理向">代理向</h1>
+
+<p>当下，代理翻墙已经成为主流。如 各种 VPN 软件 、 Lantern（蓝灯）、Psiphon（赛风）、Shadowsocks/ShadowsocksR(SS/SSR) 以及 V2ray 等都是以代理为原理，不过实现细节有所不同。</p>
+
+<p>继续拿上一篇文章的快递员来举例。</p>
+
+<pre><code>既然老大哥的审查日益严苛，那么我们只好找墙外的朋友帮忙了。
+
+首先，在寄信之前，会先和墙外的朋友协商好用来加密的密钥。
+然后将本来打算寄出的信，连信封塞入寄给朋友（代理）的大信封中，
+大信封中的内容会被协商好的密钥加密。
+
+接着，信件的收信地址填写朋友（代理）所在的地址，
+而你的朋友（代理服务器）的地址通常没有被老大哥列入黑名单，
+而由于大信封中内容已经用实现协商好的密钥加密，老大哥也无法审查其中的内容。
+
+待到你的朋友（代理）收到信后，会用密钥将之前塞入大信封的内容取出来。
+于是，你的朋友会在墙外（无污染无审查）的网络中，
+帮助你查找别名所在地址（DNS 查询），然后按照地址，帮你把信件寄出去。
+
+等到你的朋友收到回信后，还会将回信加密，再寄到你那里去，
+同理，由于内容被加密，仍然可以通过老大哥的审查。
+
+最终，一次正常的网络连接就成功完成了！
+</code></pre>
+
+<p>以上便是代理软件们的通用原理。</p>
+
+<p>不过老大哥当然也不是傻子，类似的情景不断增多，便引起了审查者的警觉。</p>
+
+<p>于是老大哥结合 AI 深度学习的技术，开始识别各种翻墙代理的流量特征。这便是<strong>深度包检测</strong>。</p>
+
+<p>最先出局的是 VPN，由于其本来的用途只是方便员工访问公司内网，翻墙用途的流量特征便很明显。</p>
+
+<p>后来，Shadowsocks 又被曝出主动检测的 BUG（现已修复），又有 GFW 工作人员发了一篇 <a href="https://www.solidot.org/story?sid=54086" target="_blank">通过机器学习识别 Shadowsocks 流量</a> 的<a href="https://www.zhihu.com/question/66531978" target="_blank">错误百出</a>的“论文”，旧版 Shadowsocks 可能不够靠谱，根据部分网友的反馈是，用的时间长可能会被限速，导致翻墙体验变差。</p>
+
+<p>不过，Shadowsocks 至今仍在维护，因此如果服务端及时更新，还是没有问题的。至于仍在活跃开发中的 V2ray 则更是堪称突破网络审查的瑞士军刀。</p>
+
+<h1 id="references">References</h1>
+
+<ol>
+<li>V2ray. <a href="https://steemit.com/cn/@v2ray/6knmmb" target="_blank">简单介绍一下网络连接的封锁与反封锁</a> [2017-10-27]</li>
+<li>Wikipedia. <a href="https://zh.wikipedia.org/zh-cn/%E7%AA%81%E7%A0%B4%E7%BD%91%E7%BB%9C%E5%AE%A1%E6%9F%A5" target="_blank">突破网络审查</a> [2019-03-01]</li>
+</ol>
+      
+      <div class="related">
+</div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+    
+  </div>
+</section>
+
+
+
+</body>
+</html>
+
