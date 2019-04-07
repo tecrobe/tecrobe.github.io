@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>如何翻墙[4]: Fqrouter 的后继者 —— VPNHotSpot | Tecrobe&#39;s Blog</title>
+
+
+
+<link rel="stylesheet" href="/blog/css/style.css"/><link rel='stylesheet' href='https://tecrobe.github.io/blog/css/custom.css'><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="https://tecrobe.github.io/blog">
+          <h1 class="title is-4">Tecrobe&#39;s Blog</h1>
+        </a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile"></nav>
+      </div>
+    </nav>
+
+    <nav class="nav">
+      
+
+      
+    </nav>
+
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="subtitle tags is-6 is-pulled-right">
+      
+    </div>
+    <h2 class="subtitle is-6">April 1, 2019</h2>
+    <h1 class="title">如何翻墙[4]: Fqrouter 的后继者 —— VPNHotSpot</h1>
+    
+    <div class="content">
+      <p>之前已经向大家介绍了一些科学上网的基本操作，今天来介绍下大名鼎鼎的<code>翻墙路由器 (Fqrouter)</code>的后继者 —— VPNHotSpot。</p>
+
+<p>事先声明：</p>
+
+<ol>
+<li><p>VPNHotSpot 是 Android 软件。</p></li>
+
+<li><p>VPNHotSpot 需要 Root 权限，如果你不知道什么是 Root ，请关闭这篇文章。另，将设备 Root 可能对于非技术专业用户有一定风险，还需谨慎。</p></li>
+
+<li><p>VPNHotSpot 是用来将自由的网络（已经翻墙/无污染）以<code>热点</code>或<code>无线中继</code>的形式分享出去的，而非用来翻墙本身。因此，如果你还不会翻墙，请先阅读<a href="/blog/post/how-to-break-wall">前一篇文章</a>。</p></li>
+</ol>
+
+<h1 id="介绍">介绍</h1>
+
+<p>VPNHotSpot ，顾名思义，当你打开 VPN 时，VPNHotSpot 能将你的 VPN 以无线热点分享出去。</p>
+
+<p>也就是说，如果你在一部手机上打开了 Shadowsocks 类科学上网工具，而且代理形式是 VPN（看通知栏上的小钥匙图标或者 VPN 标识），然后再打开 VPNHotSpot ，分享热点。那么其他设备连上这个热点，就直接连上了自由的网络（无墙状态）。</p>
+
+<p>也就是所谓<code>没有墙的感觉</code>！</p>
+
+<h1 id="使用方法">使用方法</h1>
+
+<h2 id="无线中继模式">无线中继模式</h2>
+
+<p>当手机连接的是 Wi-Fi 网络时，请使用<code>无线中继</code>模式。</p>
+
+<p>配置方法很简单，进入应用 ，打开 <code>无线中继</code> 即可。</p>
+
+<p>此时会看到一个叫做 <code>DIRECT-Wb-Android_xxxx</code> 的无线热点。</p>
+
+<p>点击网络名称，再点击密码框右侧的眼睛图标即可查看热点密码。</p>
+
+<p>如图：</p>
+
+<p><img src="/blog/image/vpnhotspot.png" alt="VPNHotSpot" /></p>
+
+<h2 id="wlan-热点模式">WLAN 热点模式</h2>
+
+<p>当手机连接的是移动数据网络时，请使用<code>WLAN 热点</code>模式。</p>
+
+<p>此时，你需要先在系统设置中打开热点。</p>
+
+<p>再进入 VPNHotSpot ，你会看到 wlan0 一栏，打开即可。</p>
+
+<h2 id="usb-网络共享模式">USB 网络共享模式</h2>
+
+<p>此模式主要适用于刚装完系统，没有网卡驱动时使用。</p>
+
+<p>先找到 USB 数据线，连接电脑。</p>
+
+<p>在系统设置中打开 <code>USB 网络共享</code>，</p>
+
+<p>然后同理，进入 VPNHotSpot ，打开 wlan0 即可。</p>
+
+<p>此时，你的电脑会显示有线连接，打开浏览器，输入 <a href="https://www.google.com" target="_blank">https://www.google.com</a> 。</p>
+
+<p>Enjoy!</p>
+
+<h1 id="疑难解答">疑难解答</h1>
+
+<p>如果其他设备连上 VPNHotSpot 开的热点无法上网，可以尝试进入 <code>设置选项</code>，开关 <code>禁用 IPv6 共享</code> 或 <code>尝试修复 DHCP</code> 来解决。</p>
+
+<h1 id="下载">下载</h1>
+
+<p><a href="https://f-droid.org/repo/be.mygod.vpnhotspot_119.apk" target="_blank">Download from FDroid</a></p>
+
+<p><a href="https://github.com/Mygod/VPNHotspot/releases/download/v2.3.4/vpnhotspot-v2.3.4.apk" target="_blank">Download from Github</a></p>
+
+<p><a href="https://f-droid.org/en/packages/be.mygod.vpnhotspot/" target="_blank">FDroid 上的页面</a>
+（进入可下载最新版本）</p>
+      
+      <div class="related">
+</div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p></p>
+    
+  </div>
+</section>
+
+
+
+</body>
+</html>
+
