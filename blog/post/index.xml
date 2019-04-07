@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Tecrobe&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 01 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 05 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://tecrobe.github.io/blog/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>如何翻墙[5]: 兼谈 DoH &#43; ESNI 突破审查</title>
+      <link>https://tecrobe.github.io/blog/post/doh-and-esni/</link>
+      <pubDate>Fri, 05 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://tecrobe.github.io/blog/post/doh-and-esni/</guid>
+      <description>&lt;p&gt;仔细看了 GFW 封锁原理那篇文章的同学应该还记得，&lt;code&gt;DNS 污染&lt;/code&gt; 和 &lt;code&gt;SNI 检测&lt;/code&gt; 是 GFW 的主要策略。&lt;/p&gt;
+
+&lt;p&gt;而 DoH (DNS over HTTPS) 和 ESNI (Encrypted SNI) 则是为了对付 GFW 这两招而发明的。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>如何翻墙[4]: Fqrouter 的后继者 —— VPNHotSpot</title>
